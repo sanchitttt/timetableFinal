@@ -14,7 +14,8 @@
    For ex : mongoimport --uri "mongodb://localhost:27017/timetable"  --jsonArray --collection subjects --file "<absolute-path>"
     2) execute the setup file in reset-database ('./timetableApp/reset-database/setup.sh')
     
-  - installServerDependencies ('./installServerDependencies')
-   -Execute the shell scripts installClientDependencies ('./installClientDependencies')
+ - installServerDependencies ('./installServerDependencies')
+ 
+ -Execute the shell scripts installClientDependencies ('./installClientDependencies')
     
 - Run your app by executing the scripts launchServer ('./launchApp.sh') and launchClient ('./launchClient.sh')
