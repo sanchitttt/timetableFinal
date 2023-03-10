@@ -9,7 +9,9 @@
 
 - If you want to load static data :
     1) Go to "./timetableApp/reset-database" and edit the --file option with the absolute path of their respective json paths which are in "./timetableApp/raw-data"
-    For ex : mongoimport --uri "mongodb://localhost:27017/timetable"  --jsonArray --collection subjects --file "<absolute-path>"
+   
+   
+   For ex : mongoimport --uri "mongodb://localhost:27017/timetable"  --jsonArray --collection subjects --file "<absolute-path>"
     2) execute the setup file in reset-database ('./timetableApp/reset-database/setup.sh')
     
     1) installServerDependencies ('./installServerDependencies')
