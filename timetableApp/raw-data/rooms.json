@@ -1,0 +1,48 @@
+[{
+        "roomId": "001"
+    },
+    {
+        "roomId": "101"
+    },
+    {
+        "roomId": "201"
+    },
+    {
+        "roomId": "202"
+    },
+    {
+        "roomId": "VCR"
+    },
+    {
+        "roomId": "301"
+    },
+    {
+        "roomId": "302"
+    },
+    {
+        "roomId": "303"
+    },
+    {
+        "roomId": "304"
+    },
+    {
+        "roomId": "305"
+    },
+    {
+        "roomId": "PG-LAB2",
+        "type": "lab"
+    },
+    {
+        "roomId": "PG-LAB1",
+        "type": "lab"
+    },
+    {
+        "roomId": "UG-LAB2",
+        "type": "lab"
+    },
+    {
+        "roomId": "UG-LAB1",
+        "type": "lab"
+    }
+
+]

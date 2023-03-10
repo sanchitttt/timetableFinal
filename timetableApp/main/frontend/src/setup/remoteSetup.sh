@@ -1,0 +1,3 @@
+# Setup file template to upload data to MongoDB Atlas
+mongoimport --uri "mongodb://admin:cowgivesmilk12345@ac-d6c2hn5-shard-00-00.saxdsyn.mongodb.net:27017,ac-d6c2hn5-shard-00-01.saxdsyn.mongodb.net:27017,ac-d6c2hn5-shard-00-02.saxdsyn.mongodb.net:27017/timetable?replicaSet=atlas-cwnzjt-shard-0&ssl=true&authSource=admin" --drop --collection subjects --file ../assets/data/subjects.json
+mongoimport --uri "mongodb://admin:cowgivesmilk12345@ac-d6c2hn5-shard-00-00.saxdsyn.mongodb.net:27017,ac-d6c2hn5-shard-00-01.saxdsyn.mongodb.net:27017,ac-d6c2hn5-shard-00-02.saxdsyn.mongodb.net:27017/timetable?replicaSet=atlas-cwnzjt-shard-0&ssl=true&authSource=admin" --drop --collection rooms --file ../assets/data/rooms.json
