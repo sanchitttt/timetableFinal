@@ -17,6 +17,6 @@
     
  - installServerDependencies ('./installServerDependencies')
  
- - Execute the shell scripts installClientDependencies ('./installClientDependencies')
+ - installClientDependencies ('./installClientDependencies')
     
 - Run your app by executing the scripts launchServer ('./launchApp.sh') and launchClient ('./launchClient.sh')
