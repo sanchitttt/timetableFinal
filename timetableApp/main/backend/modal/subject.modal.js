@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema({
     courseCode: { type: String },
     courseTitle: { type: String },
+    courseType : {type : String},
     credits: { type: String },
     classSchedulePerWeek: { type: String },
     class: { type: String },
