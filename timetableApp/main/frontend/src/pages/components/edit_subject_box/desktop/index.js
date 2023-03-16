@@ -12,7 +12,7 @@ import { saveChangesToSubjects } from '../../../../utils';
 import PageHeading from '../../PageHeading';
 import EditSubjectHeading from '../EditSubjectHeading';
 
-function EditSubjectBoxDesktop({ _id, subjectTitle, subjectCode, scheduledClassesPerWeek, className, semesterLevel, branch, closeModal, setViewableData, status, viewableData, taughtBy }) {
+function EditSubjectBoxDesktop({ _id, subjectTitle, subjectCode, scheduledClassesPerWeek, className, semesterLevel, branch, closeModal, setViewableData, status, viewableData, taughtBy, courseType }) {
   const [subjectTitleState, setSubjectTitleState] = useState(subjectTitle);
   const [subjectCodeState, setSubjectCodeState] = useState(subjectCode);
   const [classesPerWeek, setClassesPerWeek] = useState(scheduledClassesPerWeek);
@@ -21,6 +21,7 @@ function EditSubjectBoxDesktop({ _id, subjectTitle, subjectCode, scheduledClasse
   const [branchState, setBranchState] = useState(branch);
   const [statusState, setStatusState] = useState(status);
   const [taughtByState, setTaughtByState] = useState(taughtBy);
+  const [courseTypeState, setCourseTypeState] = useState(courseType);
 
   const Theme = useContext(ThemeContext);
   const Teachers = useContext(TeachersContext);
@@ -38,13 +39,14 @@ function EditSubjectBoxDesktop({ _id, subjectTitle, subjectCode, scheduledClasse
       semesterLevel: semesterLevelState,
       branch: branchState,
       status: statusState,
-      taughtBy: taughtByState
+      taughtBy: taughtByState,
+      courseType: courseTypeState
     }, viewableData, setViewableData, closeModal, event
     )
   }
 
   return (
-    <div style={{ transform: 'translate(-50%,-50%)' }} className={`absolute left-[50%] top-[50%] rounded-[8px] h-[800px] flex flex-col gap-[30px] w-[616px] bg-03 px-[30px] ${themeValue === 'dark' ? "bg-03" : "bg-[#fff]"}`}>
+    <div style={{ transform: 'translate(-50%,-50%)' }} className={`absolute left-[50%] top-[50%] rounded-[8px] h-[800px] flex flex-col gap-[30px] w-[616px] bg-03 px-[30px] ${themeValue === 'dark' ? "bg-03" : "bg-[#fff]"} pb-[30px] overflow-y-scroll`}>
       <div className='mt-[30px]'>
         <EditSubjectHeading>{subjectCode} - {subjectTitle} </EditSubjectHeading>
       </div>
@@ -121,6 +123,16 @@ function EditSubjectBoxDesktop({ _id, subjectTitle, subjectCode, scheduledClasse
         <SelectItem value={'None'} disabled>None Selected</SelectItem>
         {teachersValue.map((item) => {
           return <SelectItem value={item.teacherInitials}>{item.teacherName} ({item.teacherInitials})</SelectItem>
+        })}
+
+      </Select>
+      <Select
+        value={courseTypeState ? courseTypeState : 'theory'}
+        onChange={(e) => setCourseTypeState(e.target.value)}
+        label={'Course type'}
+      >
+        {['theory', 'lab'].map((item) => {
+          return <SelectItem value={item}>{item}</SelectItem>
         })}
 
       </Select>

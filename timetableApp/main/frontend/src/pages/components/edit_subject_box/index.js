@@ -2,7 +2,8 @@ import React from 'react'
 import EditSubjectBoxDesktop from './desktop';
 import EditSubjectBoxMobile from './mobile';
 
-function EditSubjectBox({ _id, subjectTitle, subjectCode, scheduledClassesPerWeek, className, semesterLevel, branch, closeModal, setViewableData, status,viewableData ,taughtBy}) {
+function EditSubjectBox({ _id, subjectTitle, subjectCode, scheduledClassesPerWeek, className, semesterLevel, branch, closeModal, setViewableData, status,viewableData ,taughtBy,courseType}) {
+    console.log(courseType)
     return (
         <>
             <div className='mobile:hidden desktop:block biggerDesktop:block'>
@@ -19,6 +20,7 @@ function EditSubjectBox({ _id, subjectTitle, subjectCode, scheduledClassesPerWee
                     setViewableData={setViewableData}
                     viewableData={viewableData}
                     taughtBy={taughtBy}
+                    courseType={courseType}
                 />
             </div>
             <div className='mobile:block desktop:hidden biggerDesktop:hidden'>
@@ -35,6 +37,7 @@ function EditSubjectBox({ _id, subjectTitle, subjectCode, scheduledClassesPerWee
                     setViewableData={setViewableData}
                     viewableData={viewableData}
                     taughtBy={taughtBy}
+                    courseType={courseType}
                 />
             </div>
         </>

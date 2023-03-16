@@ -10,7 +10,7 @@ import ThemeContext from '../../../../global/contexts/ThemeContext';
 import { saveChangesToSubjects } from '../../../../utils';
 import EditSubjectHeading from '../EditSubjectHeading';
 
-function EditSubjectBoxMobile({ _id, subjectTitle, subjectCode, scheduledClassesPerWeek, className, semesterLevel, branch, closeModal, setViewableData, status, viewableData, taughtBy }) {
+function EditSubjectBoxMobile({ _id, subjectTitle, subjectCode, scheduledClassesPerWeek, className, semesterLevel, branch, closeModal, setViewableData, status, viewableData, taughtBy, courseType }) {
   const [subjectTitleState, setSubjectTitleState] = useState(subjectTitle);
   const [subjectCodeState, setSubjectCodeState] = useState(subjectCode);
   const [classesPerWeek, setClassesPerWeek] = useState(scheduledClassesPerWeek);
@@ -19,6 +19,7 @@ function EditSubjectBoxMobile({ _id, subjectTitle, subjectCode, scheduledClasses
   const [branchState, setBranchState] = useState(branch);
   const [statusState, setStatusState] = useState(status);
   const [taughtByState, setTaughtByState] = useState(taughtBy);
+  const [courseTypeState, setCourseTypeState] = useState(courseType);
 
   const Theme = useContext(ThemeContext);
   const { themeValue } = Theme;
@@ -36,13 +37,14 @@ function EditSubjectBoxMobile({ _id, subjectTitle, subjectCode, scheduledClasses
       semesterLevel: semesterLevelState,
       branch: branchState,
       status: statusState,
-      taughtBy: taughtByState
+      taughtBy: taughtByState,
+      courseType: courseTypeState
     }, viewableData, setViewableData, closeModal, event
     )
   }
 
   return (
-    <div className={`w-[100%] flex flex-col gap-[25px] h-[100vh] px-[20px] ${themeValue === 'dark' ? "bg-03" : "bg-[#fff]"} overflow-scroll`}>
+    <div className={`w-[100%] flex flex-col gap-[25px] h-[100vh] px-[20px] pb-[15px] ${themeValue === 'dark' ? "bg-03" : "bg-[#fff]"} overflow-scroll`}>
       <div className='w-[100%]'>
         <EditSubjectHeading>{subjectCode} - {subjectTitle} </EditSubjectHeading>
       </div>
@@ -117,6 +119,17 @@ function EditSubjectBoxMobile({ _id, subjectTitle, subjectCode, scheduledClasses
       >
         {teachersValue.map((item) => {
           return <SelectItem value={item.teacherInitials} />
+        })}
+
+      </Select>
+
+      <Select
+        value={courseTypeState ? courseTypeState : 'theory'}
+        onChange={(e) => setCourseTypeState(e.target.value)}
+        label={'Course type'}
+      >
+        {['theory', 'lab'].map((item) => {
+          return <SelectItem key={item} value={item} />
         })}
 
       </Select>

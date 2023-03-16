@@ -29,7 +29,7 @@ function SubjectsDesktop() {
       setViewableData(subjectValue)
     }
   }, [subjectValue])
-  
+
   return (
     <div className='relative flex justify-center item-center flex-col'>
       <div className='desktop-navbar absolute left-[0px] h-[100%]'>
@@ -71,6 +71,7 @@ function SubjectsDesktop() {
                       courseCode={subject.courseCode}
                       courseTitle={subject.courseTitle}
                       classSchedulePerWeek={subject.classSchedulePerWeek}
+                      courseType={subject.courseType}
                       className={subject.class}
                       branch={subject.branch}
                       credits={subject.credits}
