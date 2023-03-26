@@ -138,7 +138,7 @@ function AddPreferenceDesktop({ closeModal }) {
         }
         else {
             const filtered = subjectValue.filter((item) => {
-                if (item.semesterLevel === semester && item.class === branch) return item;
+                if (item.semesterLevel === semester && item.class === branch && item.status==='active') return item;
             })
             setSubjects(filtered);
         }
