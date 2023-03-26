@@ -16,7 +16,7 @@
   [![1](./readmeResources/setupDatabase.jpg)]
   [![2](./readmeResources/2.jpg)]
   [![3](./readmeResources/3.jpg)]
-    - execute the setup file in reset-database ('./timetableApp/reset-database/setup.sh')
+   ### execute the setup file in reset-database ('./timetableApp/reset-database/setup.sh')
     
 ### Replace the string path on line 14  in "timetableFinal\timetableApp\main\backend\controller\timetable.controller" with the absolute path of users.xlsl in "timetableFinal\timetableApp\main\backend\users.xlsx"
 
