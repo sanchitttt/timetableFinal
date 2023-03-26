@@ -14,6 +14,7 @@
    
             For ex :
             mongoimport --uri "mongodb://localhost:27017/timetable"  --jsonArray --collection subjects --file "<absolute-path>"
+   [./readmeResources/setupDatabase.jpg](https://kanban-sanchit.vercel.app/register)
    (./readmeResources/setupDatabase.jpg)
     (./readmeResources/2.jpg)
       (./readmeResources/3.jpg)
