@@ -17,6 +17,9 @@ export const searchSubjectByQuery = (value, subjects, setViewableData) => {
             else if (semesterLevel && semesterLevel.match(regex)) {
                 return item;
             }
+            else if(`${className}-${semesterLevel}`.match(regex) ){
+                return item;
+            }
         })
         setViewableData([...filtered]);
     }
