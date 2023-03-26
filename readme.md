@@ -2,7 +2,7 @@
 
 ## First time installation
 
-### Download NodeJS [https://nodejs.dev/en/download/] (if you don't have it already)
+### Download NodeJS [https://nodejs.dev/en/download/] 
 ### Download and install the following MongoDB stuff : 
  [MongoDB Database Tools]  [https://fastdl.mongodb.org/tools/db/mongodb-database-tools-windows-x86_64-100.7.0.zip]
  [MongoDB Compass]  [https://downloads.mongodb.com/compass/mongodb-compass-1.35.0-win32-x64.exe]
