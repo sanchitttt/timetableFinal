@@ -14,9 +14,9 @@
    
             For ex :
             mongoimport --uri "mongodb://localhost:27017/timetable"  --jsonArray --collection subjects --file "<absolute-path>"
-    [![Room GPT](./readmeResources/setupDatabase.jpg)]
-     [![Room GPT](./readmeResources/2.jpg)]
-      [![Room GPT](./readmeResources/3.jpg)]
+   (./readmeResources/setupDatabase.jpg)
+    (./readmeResources/2.jpg)
+      (./readmeResources/3.jpg)
     2) execute the setup file in reset-database ('./timetableApp/reset-database/setup.sh')
     
  - installServerDependencies ('./installServerDependencies')
