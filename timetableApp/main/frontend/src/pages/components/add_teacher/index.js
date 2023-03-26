@@ -5,7 +5,9 @@ import Button4 from '../../../common/buttons/Button4';
 import Text20px from '../../../common/text/Text20px';
 import ErrorLabel from '../../../common/inputs/ErrorLabel';
 import ThemeContext from '../../../global/contexts/ThemeContext'
-import { postTeacher } from '../../../utils/apiCalls';
+import { TeachersApi } from '../../../utils/api_calls';
+
+const TeachersApiInstance = new TeachersApi();
 
 function AddTeacher({ closeModal, viewableData, setViewableData }) {
     const [teacherName, setTeacherName] = useState('');
@@ -19,7 +21,7 @@ function AddTeacher({ closeModal, viewableData, setViewableData }) {
                 teacherInitials: teacherInitials,
                 subjectsTaught: []
             }
-            postTeacher(obj)
+            TeachersApiInstance.postTeacher(obj)
             viewableData.push(obj)
             setViewableData([...viewableData])
             closeModal(event);

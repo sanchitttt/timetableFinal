@@ -1,19 +1,26 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+
 import ThemeContext from "./global/contexts/ThemeContext";
-import TeachersPage from "./pages/teachers_page";
-import SubjectsPage from "./pages/subjects_page";
-import TimetablePage from "./pages/timetable_page";
-import RoomsPage from "./pages/rooms_page";
-import axios from "axios";
-import config from './setup/config';
 import SubjectsContext from "./global/contexts/SubjectsContext";
 import RoomsContext from "./global/contexts/RoomsContext";
-import NavigateBack from "./pages/navigate_back";
-import { getTeachers } from "./utils/apiCalls";
-import TeachersContext from "./global/contexts/TeachersContext";
-import RoomPrefencesPage from "./pages/room_preferences_page";
 import TimetablePreferenceContext from "./global/contexts/TimetablePreferenceContext";
+import TeachersContext from "./global/contexts/TeachersContext";
+
+import RoomPrefencesPage from "./pages/room_preferences_page";
+import TeachersPage from "./pages/teachers_page";
+import SubjectsPage from "./pages/subjects_page";
+import RoomsPage from "./pages/rooms_page";
+import TimetablePage from "./pages/timetable_page";
+import NavigateBack from "./pages/navigate_back";
+
+import { SubjectsApi, TeachersApi, RoomsApi, PreferencesApi, MergedSubjectApi } from "./utils/api_calls";
+
+const SubjectsApiInstance = new SubjectsApi();
+const TeachersApiInstance = new TeachersApi();
+const RoomsApiInstance = new RoomsApi();
+const PreferencesApiInstance = new PreferencesApi();
+const MergedSubjectApiInstance = new MergedSubjectApi();
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -21,7 +28,6 @@ function App() {
   const [rooms, setRooms] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [mergedSubjects, setMergedSubjects] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [timetablePreferences, setTimetablePreferences] = useState([]);
 
   useEffect(() => {
@@ -30,40 +36,33 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    const fetch = async () => {
-      const { data } = await axios.get(`${config.BACKEND_URL}/subjects`);
+    const fetchSubjects = async () => {
+      const data = await SubjectsApiInstance.getAll();
       setSubjects(data);
     }
-    const fetch2 = async () => {
-      const { data } = await axios.get(`${config.BACKEND_URL}/rooms`);
+    const fetchRooms = async () => {
+      const data = await RoomsApiInstance.getAll();
       setRooms(data);
     }
-    const fetch3 = async () => {
-      const data = await getTeachers();
+    const fetchTeachers = async () => {
+      const data = await TeachersApiInstance.getAll();
       setTeachers(data);
     }
-    const fetch4 = async () => {
-      const { data } = await axios.get(`${config.BACKEND_URL}/mergedSubjects`);
+    const fetchMergedSubjects = async () => {
+      const data = await MergedSubjectApiInstance.getAll();
       setMergedSubjects(data);
     }
-    const fetch5 = async () => {
-      const { data } = await axios.get(`${config.BACKEND_URL}/timetablePreferences`);
-      const hashMap = new Map();
-      for (let i = 0; i < data.length; i++) {
-        const day = data[i].day;
-        const period = data[i].period;
-        const key = `${day}${period}`;
-        hashMap.set(key, data[i]);
-      }
+    const fetchTimetablePreferences = async () => {
+      const hashMap = await PreferencesApiInstance.getAllInMap();
       setTimetablePreferences(hashMap);
     }
-    fetch();
-    fetch2();
-    fetch3();
-    fetch4();
-    fetch5();
-    setLoading(false);
+    fetchSubjects();
+    fetchRooms();
+    fetchTeachers();
+    fetchMergedSubjects();
+    fetchTimetablePreferences();
   }, []);
+
   return (
     <div className={`App`}>
       <ThemeContext.Provider value={{ themeValue: theme, changeTheme: setTheme }}>

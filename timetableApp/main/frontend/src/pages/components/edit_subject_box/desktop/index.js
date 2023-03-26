@@ -5,13 +5,14 @@ import ErrorLabel from '../../../../common/inputs/ErrorLabel';
 import Select from '../../../../common/inputs/Select';
 import SelectItem from '../../../../common/inputs/SelectItem';
 import TextField from '../../../../common/inputs/TextField';
-import Text15px from '../../../../common/text/Text15px';
 import TeachersContext from '../../../../global/contexts/TeachersContext';
 import ThemeContext from '../../../../global/contexts/ThemeContext';
 import TimetablePreferenceContext from '../../../../global/contexts/TimetablePreferenceContext';
 import { checkIfSubjectIsAPreference, saveChangesToSubjects } from '../../../../utils';
-import PageHeading from '../../PageHeading';
+import { SubjectsApi } from '../../../../utils/api_calls';
 import EditSubjectHeading from '../EditSubjectHeading';
+
+const SubjectsApiInstance = new SubjectsApi();
 
 function EditSubjectBoxDesktop({ _id, subjectTitle, subjectCode, scheduledClassesPerWeek, className, semesterLevel, branch, closeModal, setViewableData, status, viewableData, taughtBy, courseType }) {
   const [subjectTitleState, setSubjectTitleState] = useState(subjectTitle);
@@ -33,7 +34,7 @@ function EditSubjectBoxDesktop({ _id, subjectTitle, subjectCode, scheduledClasse
 
 
   const saveHandler = (event) => {
-    saveChangesToSubjects({
+    const details = {
       _id: _id,
       courseTitle: subjectTitleState,
       courseCode: subjectCodeState,
@@ -44,10 +45,10 @@ function EditSubjectBoxDesktop({ _id, subjectTitle, subjectCode, scheduledClasse
       status: statusState,
       taughtBy: taughtByState,
       courseType: courseTypeState
-    }, viewableData, setViewableData, closeModal, event
-    )
+    }
+    saveChangesToSubjects(details, viewableData, setViewableData, closeModal, event)
+    SubjectsApiInstance.patchSubject(details);
     const result = checkIfSubjectIsAPreference(_id, timetablePreferencesValue, subjectCodeState, taughtByState);
-    console.log(result);
     if (result) {
       const newMap = new Map(result);
       setTimetablePreferences(newMap);

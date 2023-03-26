@@ -1,4 +1,4 @@
-import { patchSubject } from "./apiCalls";
+// import { patchSubject } from "./api_calls";
 
 export const searchSubjectByQuery = (value, subjects, setViewableData) => {
     if (value.length) {
@@ -15,6 +15,9 @@ export const searchSubjectByQuery = (value, subjects, setViewableData) => {
                 return item;
             }
             else if (semesterLevel && semesterLevel.match(regex)) {
+                return item;
+            }
+            else if(`${className}-${semesterLevel}`.match(regex) ){
                 return item;
             }
         })
@@ -58,9 +61,7 @@ export function saveChangesToSubjects(details, viewableData, setViewableData, cl
         }
     }
     setViewableData([...viewableData])
-    patchSubject(details);
     closeModal(event);
-
 }
 
 

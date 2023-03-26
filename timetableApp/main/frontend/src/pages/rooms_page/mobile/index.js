@@ -2,10 +2,13 @@ import { CircularProgress, Modal } from '@mui/material';
 import React, { useContext, useState } from 'react'
 import MobileNavbar from '../../../common/navbar/MobileNavbar';
 import RoomsContext from '../../../global/contexts/RoomsContext';
-import { deleteRoom } from '../../../utils/apiCalls';
 import NewRoom from '../../components/add_room';
 import PageHeading from '../../components/PageHeading';
 import RoomBox from '../../components/rooms_box';
+import { RoomsApi } from '../../../utils/api_calls';
+
+const RoomsApiInstance = new RoomsApi();
+
 
 function RoomsPageMobile() {
   const [showModal, setShowModal] = useState(false);
@@ -17,7 +20,7 @@ function RoomsPageMobile() {
       if (item._id !== id) return item;
     })
     setRooms([...filtered]);
-    deleteRoom(id);
+    RoomsApiInstance.deleteRoom(id);
   }
 
 

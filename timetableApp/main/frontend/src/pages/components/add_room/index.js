@@ -5,7 +5,9 @@ import ErrorLabel from '../../../common/inputs/ErrorLabel';
 import TextField from '../../../common/inputs/TextField';
 import Text20px from '../../../common/text/Text20px';
 import ThemeContext from '../../../global/contexts/ThemeContext'
-import { addRoom } from '../../../utils/apiCalls';
+import { RoomsApi } from '../../../utils/api_calls';
+
+const RoomsApiInstance = new RoomsApi();
 
 function NewRoom({ viewableData, setViewableData, closeModal }) {
     const [roomId, setRoomId] = useState('');
@@ -18,7 +20,7 @@ function NewRoom({ viewableData, setViewableData, closeModal }) {
             roomId:roomId
         });
         setViewableData([...currArr]);
-        addRoom(roomId);
+        RoomsApiInstance.addRoom(roomId);
         closeModal();
     }
 

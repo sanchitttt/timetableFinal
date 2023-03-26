@@ -10,7 +10,7 @@ import ErrorLabel from '../../../../common/inputs/ErrorLabel'
 import ThemeContext from '../../../../global/contexts/ThemeContext';
 import axios from 'axios';
 import config from '../../../../setup/config/index'
-import { addMergedSubject } from '../../../../utils/apiCalls'
+// import { addMergedSubject } from '../../../../utils/api_calls'
 
 const threeYearSemesters = [
     'I/1',
@@ -95,7 +95,7 @@ function MergeSubjectDesktop({ closeModal }) {
             const payload = {
                 "ids": mergedSubjectsIdsList
             }
-            addMergedSubject(payload)
+            // addMergedSubject(payload)
                 .then((data) => {
                     const newArr = mergedSubjectsValue;
                     const filtered = subjectValue.filter((item) => {

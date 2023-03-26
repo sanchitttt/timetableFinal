@@ -3,7 +3,7 @@ import DeleteIcon from '../../../common/DeleteIcon';
 import Text15px from '../../../common/text/Text15px';
 import Text18px from '../../../common/text/Text18px';
 import ThemeContext from '../../../global/contexts/ThemeContext';
-import { getTeachers } from '../../../utils/apiCalls';
+// import { getTeachers } from '../../../utils/api_calls';
 
 function TeachersBox({ id, teacherName, teacherInitials, subjectsTaught, deleteHandler }) {
     const Theme = useContext(ThemeContext);

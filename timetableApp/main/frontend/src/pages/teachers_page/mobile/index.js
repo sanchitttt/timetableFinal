@@ -3,30 +3,30 @@ import React, { useContext, useEffect, useState } from 'react'
 import MobileNavbar from '../../../common/navbar/MobileNavbar';
 import TeachersContext from '../../../global/contexts/TeachersContext';
 import PageHeading from '../../components/PageHeading';
-import { deleteTeacher } from '../../../utils/apiCalls';
+import { TeachersApi } from '../../../utils/api_calls';
 import TeachersBox from '../../components/teachers_box';
 import AddTeacher from '../../components/add_teacher';
+import NoRecords from '../../components/no_records_found';
+
+
+const TeachersApiInstance = new TeachersApi();
 
 function TeachersMobile() {
-    const [value, setValue] = useState('');
-    const [loading, setLoading] = useState(true);
     const Teachers = useContext(TeachersContext);
-    const { teachersValue, setTeachersValue } = Teachers;
+    const { teachersValue } = Teachers;
     const [viewableData, setViewableData] = useState(teachersValue);
     const [addTeacherModal, setAddTeacherModal] = useState(false);
-
 
     const deleteHandler = (id) => {
         const filtered = teachersValue.filter((item) => {
             return item._id !== id;
         })
         setViewableData([...filtered]);
-        deleteTeacher(id);
+        TeachersApiInstance.deleteTeacher(id);
     }
 
     useEffect(() => {
         if (teachersValue.length) {
-            setLoading(false)
             setViewableData(teachersValue)
         }
     }, [teachersValue])
@@ -57,7 +57,11 @@ function TeachersMobile() {
                         })}
                     </div>
                 </div>
-                {/* <NoInvoices /> */}
+                {!viewableData.length && <NoRecords
+                    mainHeading={'No teachers found'}
+                    subHeading={'Add teachers for them to show up here'}
+                />}
+
             </div>
 
             <Modal open={addTeacherModal}>

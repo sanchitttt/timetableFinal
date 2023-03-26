@@ -1,19 +1,24 @@
 import { Modal } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
+
 import DesktopNavbar from '../../../common/navbar/DesktopNavbar';
 import MobileNavbar from '../../../common/navbar/MobileNavbar';
 import TeachersContext from '../../../global/contexts/TeachersContext';
-import { deleteTeacher } from '../../../utils/apiCalls';
+
+
+import { TeachersApi } from '../../../utils/api_calls';
 import AddTeacher from '../../components/add_teacher';
 import PageHeading from '../../components/PageHeading';
 import TeachersBox from '../../components/teachers_box';
 
 
+const TeachersApiInstance = new TeachersApi();
+
 function TeachersDesktop() {
+
   const Teachers = useContext(TeachersContext);
   const { teachersValue } = Teachers;
   const [viewableData, setViewableData] = useState(teachersValue);
-  const [loading, setLoading] = useState(true);
   const [addTeacherModal, setAddTeacherModal] = useState(false);
 
   const deleteHandler = (id) => {
@@ -21,15 +26,16 @@ function TeachersDesktop() {
       return item._id !== id;
     })
     setViewableData([...filtered]);
-    deleteTeacher(id);
+    TeachersApiInstance.deleteTeacher(id);
   }
 
   useEffect(() => {
     if (teachersValue.length) {
-      setLoading(false)
       setViewableData(teachersValue)
     }
-  }, [teachersValue])
+  }, [teachersValue]);
+
+  
   return (
     <div className='relative flex justify-center item-center flex-col'>
       <div className='desktop-navbar absolute left-[0px] h-[100%]'>

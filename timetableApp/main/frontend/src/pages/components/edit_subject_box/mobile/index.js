@@ -7,8 +7,12 @@ import SelectItem from '../../../../common/inputs/SelectItem';
 import TextField from '../../../../common/inputs/TextField';
 import TeachersContext from '../../../../global/contexts/TeachersContext';
 import ThemeContext from '../../../../global/contexts/ThemeContext';
-import { saveChangesToSubjects } from '../../../../utils';
+import TimetablePreferenceContext from '../../../../global/contexts/TimetablePreferenceContext';
+import { checkIfSubjectIsAPreference, saveChangesToSubjects } from '../../../../utils';
+import { SubjectsApi } from '../../../../utils/api_calls';
 import EditSubjectHeading from '../EditSubjectHeading';
+
+const SubjectsApiInstance = new SubjectsApi();
 
 function EditSubjectBoxMobile({ _id, subjectTitle, subjectCode, scheduledClassesPerWeek, className, semesterLevel, branch, closeModal, setViewableData, status, viewableData, taughtBy, courseType }) {
   const [subjectTitleState, setSubjectTitleState] = useState(subjectTitle);
@@ -24,11 +28,14 @@ function EditSubjectBoxMobile({ _id, subjectTitle, subjectCode, scheduledClasses
   const Theme = useContext(ThemeContext);
   const { themeValue } = Theme;
 
+  const Preferences = useContext(TimetablePreferenceContext);
+  const { timetablePreferencesValue, setTimetablePreferences } = Preferences;
+
   const Teachers = useContext(TeachersContext);
   const { teachersValue } = Teachers;
 
   const saveHandler = (event) => {
-    saveChangesToSubjects({
+    const details = {
       _id: _id,
       courseTitle: subjectTitleState,
       courseCode: subjectCodeState,
@@ -39,8 +46,14 @@ function EditSubjectBoxMobile({ _id, subjectTitle, subjectCode, scheduledClasses
       status: statusState,
       taughtBy: taughtByState,
       courseType: courseTypeState
-    }, viewableData, setViewableData, closeModal, event
-    )
+    }
+    saveChangesToSubjects(details, viewableData, setViewableData, closeModal, event)
+    SubjectsApiInstance.patchSubject(details);
+    const result = checkIfSubjectIsAPreference(_id, timetablePreferencesValue, subjectCodeState, taughtByState);
+    if (result) {
+      const newMap = new Map(result);
+      setTimetablePreferences(newMap);
+    }
   }
 
   return (

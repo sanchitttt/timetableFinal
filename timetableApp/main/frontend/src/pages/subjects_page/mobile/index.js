@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import TextField from '../../../common/inputs/TextField';
 import MobileNavbar from '../../../common/navbar/MobileNavbar';
 import SubjectsContext from '../../../global/contexts/SubjectsContext';
-import { makeid, searchSubjectByQuery } from '../../../utils';
+import { searchSubjectByQuery } from '../../../utils';
 import AddSubject from '../../components/add_subject';
 import InvoicesHeading from '../../components/PageHeading';
 import SubjectsBox from '../../components/subjectsBox';

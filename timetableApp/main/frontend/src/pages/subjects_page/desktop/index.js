@@ -1,23 +1,24 @@
-import { CircularProgress, Modal, Skeleton } from '@mui/material';
+import { CircularProgress, Modal } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import Button5 from '../../../common/buttons/Button5'
-import DeleteIcon from '../../../common/DeleteIcon';
 import TextField from '../../../common/inputs/TextField';
 import DesktopNavbar from '../../../common/navbar/DesktopNavbar';
 import MobileNavbar from '../../../common/navbar/MobileNavbar';
 import Tab from '../../../common/tabs';
-import Text24px from '../../../common/text/Text24px';
 import SubjectsContext from '../../../global/contexts/SubjectsContext';
 import ThemeContext from '../../../global/contexts/ThemeContext';
 import { searchSubjectByQuery } from '../../../utils';
-import { deleteMergedSubject } from '../../../utils/apiCalls';
 import AddSubject from '../../components/add_subject';
 import AddMergedSubjectBox from '../../components/merge_subjects_box';
 import NoRecords from '../../components/no_records_found';
 import InvoicesHeading from '../../components/PageHeading';
 import SubjectsBox from '../../components/subjectsBox';
+import { SubjectsApi } from '../../../utils/api_calls';
 
-const tabs = [
+
+const SubjectsApiInstance = new SubjectsApi();
+
+const TABS = [
   'All',
   'Optional'
 ]
@@ -48,7 +49,7 @@ function SubjectsDesktop() {
   }, [subjectValue]);
 
   const deleteOptionalSubject = (e, id, subjectsToBeAddedBack) => {
-    deleteMergedSubject(id);
+    SubjectsApiInstance.deleteMergedSubject(id);
     const filtered = mergedSubjectsValue.filter((item) => {
       if (item._id !== id) return item;
     })
@@ -88,7 +89,7 @@ function SubjectsDesktop() {
             />
           </div>
           <div className='flex w-[300px] mt-[10px] gap-[7.5px]'>
-            {tabs.map((tab) => <div
+            {TABS.map((tab) => <div
               onClick={() => setActiveTab(tab)}
             >
               <Tab
@@ -175,8 +176,8 @@ function SubjectsDesktop() {
                 </div>
                 : <>
                   <NoRecords
-                    mainHeading={'No records found'}
-                    subHeading={'Add subjects for them to show up here'}
+                    mainHeading={activeTab === 'All' ? 'No records found' : 'No optional subjects created'}
+                    subHeading={activeTab === 'All' ? 'Add subjects for them to show up here' : 'Create an optional subject for them to appear here'}
                   />
                 </>
 

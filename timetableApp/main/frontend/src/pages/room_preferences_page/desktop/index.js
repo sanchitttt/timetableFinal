@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import DesktopNavbar from '../../../common/navbar/DesktopNavbar';
 import TimetablePreferenceContext from '../../../global/contexts/TimetablePreferenceContext';
 import AddPreference from '../../components/add_preference';
+import NoRecords from '../../components/no_records_found';
 import PageHeading from '../../components/PageHeading';
 import PreferenceBox from '../../components/preference_box';
 
@@ -53,7 +54,12 @@ function RoomPreferencesDesktop() {
                   text={item.text}
                 />
               })}
+
             </div>
+            {!timetablePreferencesList.length && <NoRecords
+              mainHeading={'No preferences found'}
+              subHeading={'Add a preference for them to show up here'}
+            />}
           </div>
         </div>
       </div>

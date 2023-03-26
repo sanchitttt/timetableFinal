@@ -4,13 +4,14 @@ import generateTimetable from 'timetablegeneratorpackage';
 import Button2 from '../../../common/buttons/Button2';
 import Checkbox from '../../../common/inputs/Checkbox';
 import MobileNavbar from '../../../common/navbar/MobileNavbar';
-import Text15px from '../../../common/text/Text15px';
 import Text24px from '../../../common/text/Text24px';
 import RoomsContext from '../../../global/contexts/RoomsContext';
 import SubjectsContext from '../../../global/contexts/SubjectsContext';
 import { generateInputForTimetable } from '../../../utils';
-import { downloadAsAttachment } from '../../../utils/apiCalls';
-import Table from '../Table';
+import { TimetableApi } from '../../../utils/api_calls';
+
+const TimetableApiInstance = new TimetableApi();
+
 
 const inputArr = [
   ['bca', 'II'],
@@ -118,7 +119,7 @@ function TimetableMobile() {
 
   const clickHandler = () => {
     const res = generateTimetable(inputArrState, roomsValue, subjectValue, false);
-    downloadAsAttachment(res);
+    TimetableApiInstance.postData(res);
   }
 
 
@@ -173,7 +174,7 @@ function TimetableMobile() {
         </div>
 
         <div style={{ textAlign: 'center' }} className='w-[100%] mt-[50px] flex items-center justify-center align-center w-[80%] h-[100%] overflow-scroll '>
-         <Text24px>Please use a desktop screen or tablet for viewing the timetable</Text24px>
+          <Text24px>Please use a desktop screen or tablet for viewing the timetable</Text24px>
           {/* {data && <Table data={data} />} */}
         </div>
       </div>

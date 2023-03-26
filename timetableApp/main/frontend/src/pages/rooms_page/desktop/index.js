@@ -5,7 +5,10 @@ import PageHeading from '../../components/PageHeading'
 import RoomsBox from '../../components/rooms_box';
 import { CircularProgress, Modal } from '@mui/material';
 import RoomsContext from '../../../global/contexts/RoomsContext';
-import { deleteRoom } from '../../../utils/apiCalls';
+import { RoomsApi } from '../../../utils/api_calls';
+
+const RoomsApiInstance = new RoomsApi();
+
 
 function RoomsPageDesktop() {
     const [showModal, setShowModal] = useState(false);
@@ -19,7 +22,7 @@ function RoomsPageDesktop() {
             if (item._id !== id) return item;
         })
         setRooms([...filtered]);
-        deleteRoom(id);
+        RoomsApiInstance.deleteRoom(id);
     }
 
     return (

@@ -5,7 +5,6 @@ import Text18px from '../../../common/text/Text18px';
 import ThemeContext from '../../../global/contexts/ThemeContext';
 import ActiveStatus from '../active_status';
 import { Modal } from '@mui/material'
-import EditSubjectBoxDesktop from '../edit_subject_box/desktop';
 import EditSubjectBox from '../edit_subject_box';
 
 

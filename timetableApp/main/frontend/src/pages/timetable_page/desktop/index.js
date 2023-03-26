@@ -6,16 +6,16 @@ import Text24px from '../../../common/text/Text24px';
 import RoomsContext from '../../../global/contexts/RoomsContext';
 import SubjectsContext from '../../../global/contexts/SubjectsContext';
 import { generateInputForTimetable } from '../../../utils';
-import { downloadAsAttachment } from '../../../utils/apiCalls';
-// import jsonToExcel from '../../../utils/jsonToExcel';
-import { Link, useHref, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Table from '../Table';
 import Button2 from '../../../common/buttons/Button2';
-import MobileNavbar from '../../../common/navbar/MobileNavbar';
 import config from '../../../setup/config';
 import DesktopNavbar from '../../../common/navbar/DesktopNavbar';
 import TimetablePreferenceContext from '../../../global/contexts/TimetablePreferenceContext';
+import { TimetableApi } from '../../../utils/api_calls';
+
+const TimetableApiInstance = new TimetableApi();
 
 const initialState = {
     bca1: false,
@@ -162,33 +162,33 @@ function TimetableDesktop() {
         else {
             setHasLoaded(true);
             const res = generateTimetable(inputArrState, roomsValue, [...subjectValue, ...mergedSubjectsValue], preferencesState, false);
-            downloadAsAttachment(res);
+            TimetableApiInstance.postTimetable(res);
         }
 
     }
 
     const downloadHandler = () => {
-        if(!inputArrState.length){
+        if (!inputArrState.length) {
             window.alert('Check atleast one checkbox');
         }
-        else if(!hasGenerated){
+        else if (!hasGenerated) {
             window.alert('Click on show preview first');
         }
         else if (!hasLoaded) {
             window.alert('Load the data first');
         }
-        else if(hasGenerated){
+        else if (hasGenerated) {
             window.alert('Reload the page for generating a new timetable')
         }
     }
 
     return (
-        <div className='flex gap-[10px]'>
+        <div className='flex gap-[20px]'>
             <div className='h-[100%]'>
                 <DesktopNavbar />
             </div>
-            <div className='flex items-center flex-col justify-center h-[100vh] '>
-                <div className='desktop:w-[900px] biggerDesktops:w-[1200px] gap-[30px] flex flex-col justify-between'>
+            <div className='flex items-center w-[85%] flex-col justify-center h-[100vh] '>
+                <div className='w-[100%] flex flex-col justify-between'>
                     <div className='flex justify-between items-center w-[100%]'>
                         <div className='flex flex-col'>
                             <Text24px>Timetable</Text24px>

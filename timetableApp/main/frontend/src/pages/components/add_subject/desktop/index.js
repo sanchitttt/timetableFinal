@@ -6,7 +6,9 @@ import SelectItem from "../../../../common/inputs/SelectItem";
 import Text24px from '../../../../common/text/Text24px';
 import Button4 from '../../../../common/buttons/Button4';
 import Button2 from '../../../../common/buttons/Button2';
-import { addNewSubject } from '../../../../utils/apiCalls';
+import { SubjectsApi } from '../../../../utils/api_calls';
+
+const SubjectsApiInstance = new SubjectsApi();
 
 function AddSubjectDesktop({ closeModal }) {
   const [subjectTitleState, setSubjectTitleState] = useState('');
@@ -21,7 +23,7 @@ function AddSubjectDesktop({ closeModal }) {
   const { themeValue } = Theme;
 
   const createHandler = (event) => {
-    addNewSubject({
+    SubjectsApiInstance.addNewSubject({
       courseTitle: subjectTitleState,
       courseCode: subjectCodeState,
       classSchedulePerWeek: classesPerWeek,

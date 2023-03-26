@@ -5,7 +5,9 @@ import Text15px from '../../../common/text/Text15px'
 import Text18px from '../../../common/text/Text18px'
 import ThemeContext from '../../../global/contexts/ThemeContext'
 import TimetablePreferenceContext from '../../../global/contexts/TimetablePreferenceContext'
-import { deletePreference } from '../../../utils/apiCalls'
+import { PreferencesApi } from '../../../utils/api_calls'
+
+const PreferenceApiInstance = new PreferencesApi();
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 const periodTransformation = (period) => {
@@ -44,7 +46,7 @@ function PreferenceBox({ id, text, day, period, color }) {
         map.delete(key);
         const newMap = new Map(map);
         setTimetablePreferences(newMap);
-        deletePreference(id);
+        PreferenceApiInstance.deletePreference(id);
     }
 
     return (

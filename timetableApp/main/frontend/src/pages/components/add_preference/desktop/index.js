@@ -7,8 +7,10 @@ import Text24px from '../../../../common/text/Text24px';
 import SubjectsContext from '../../../../global/contexts/SubjectsContext';
 import ThemeContext from '../../../../global/contexts/ThemeContext';
 import ErrorLabel from '../../../../common/inputs/ErrorLabel';
-import { addPreference } from '../../../../utils/apiCalls';
 import TimetablePreferenceContext from '../../../../global/contexts/TimetablePreferenceContext';
+import { PreferencesApi } from '../../../../utils/api_calls';
+
+const PreferenceApiInstance = new PreferencesApi();
 
 const branches = ['BCA', 'MCA', 'BBA', 'MBA'];
 
@@ -114,7 +116,7 @@ function AddPreferenceDesktop({ closeModal }) {
             else {
                 console.log('error add_preference');
             }
-            addPreference(payload);
+            PreferenceApiInstance.addPreference(payload);
             const currMap = timetablePreferencesValue;
             const key = `${selectedDay}${selectedPeriod}`
             currMap.set(key, payload);
@@ -138,7 +140,7 @@ function AddPreferenceDesktop({ closeModal }) {
         }
         else {
             const filtered = subjectValue.filter((item) => {
-                if (item.semesterLevel === semester && item.class === branch) return item;
+                if (item.semesterLevel === semester && item.class === branch && item.status === 'active') return item;
             })
             setSubjects(filtered);
         }
