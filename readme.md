@@ -14,9 +14,9 @@
    
             For ex :
             mongoimport --uri "mongodb://localhost:27017/timetable"  --jsonArray --collection subjects --file "<absolute-path>"
-  [![1]  (./readmeResources/setupDatabase.jpg)]("./timetableApp/reset-database")
-   [![2]   (./readmeResources/2.jpg)]('./timetableApp/raw-data')
-    [![3]   (./readmeResources/3.jpg)]('./timetableApp/raw-data')
+  [![1]  (./readmeResources/setupDatabase.jpg)]
+   [![2]   (./readmeResources/2.jpg)]
+    [![3]   (./readmeResources/3.jpg)]
 
     2) execute the setup file in reset-database ('./timetableApp/reset-database/setup.sh')
     
