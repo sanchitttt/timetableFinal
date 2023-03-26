@@ -1,6 +1,6 @@
 # Timetable App
 
-## Steps for executing
+## First time installation
 
 ### Download NodeJS [https://nodejs.dev/en/download/] (if you don't have it already)
 ### Download and install the following MongoDB stuff : 
@@ -27,4 +27,5 @@
  
 ### installClientDependencies ('./installClientDependencies')
     
-- Run your app by executing the scripts launchServer ('./launchApp.sh') and launchClient ('./launchClient.sh')
+## Execution
+### Run your app by executing the scripts launchServer ('./launchApp.sh') and launchClient ('./launchClient.sh')
