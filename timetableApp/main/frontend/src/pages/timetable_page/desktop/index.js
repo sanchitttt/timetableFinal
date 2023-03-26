@@ -242,7 +242,7 @@ function TimetableDesktop() {
                         </div>
                     </div>
 
-                    <div className='w-[100%] h-[65vh] overflow-scroll '>
+                    <div className='mt-[20px] w-[100%] h-[65vh] overflow-scroll '>
                         {hasErrors ?
                             <>
                                 <h1 className='text-[40px] text-09'>{hasErrors.type}</h1>
