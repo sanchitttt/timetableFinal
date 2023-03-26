@@ -6,7 +6,7 @@ function Text24px({ children, color }) {
     const { themeValue } = Theme;
 
     return (
-        <div className={`text-[24px] font-bold  ${themeValue==='dark'? "text-[#fff]" : "text-[#000]"}`} style={{ letterSpacing: '-0.25px' }}>
+        <div className={`text-[24px] font-bold  ${color ? `text-${color}` : themeValue === 'dark' ? "text-[#fff]" : "text-[#000]"}`} style={{ letterSpacing: '-0.25px' }}>
             {children}
         </div>
     )

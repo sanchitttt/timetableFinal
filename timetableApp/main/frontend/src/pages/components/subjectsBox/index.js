@@ -10,16 +10,18 @@ import EditSubjectBox from '../edit_subject_box';
 
 
 
-function SubjectsBox({ _id, courseCode, courseTitle, classSchedulePerWeek, className, branch, credits, status, semesterLevel, setViewableData, viewableData, taughtBy, courseType }) {
+function SubjectsBox({ _id, courseCode, courseTitle, classSchedulePerWeek, className, branch, credits, status, semesterLevel, setViewableData, viewableData, taughtBy, courseType, color, disabled }) {
     const [showModal, setShowModal] = useState(false);
     const Theme = useContext(ThemeContext);
     const { themeValue } = Theme;
 
     return (
         <div
-            role={'button'}
-            className={`p-[20px]  w-[300px] h-[200px] justify-between gap-[10px] flex flex-col ${themeValue === 'dark' ? "bg-03" : "bg-[#fff]"} rounded-[8px] `}
-            onClick={() => setShowModal(true)}
+            role={!disabled && 'button'}
+            className={`p-[20px]  w-[300px] h-[200px] justify-between gap-[10px] flex flex-col ${color ? 'bg-14' : themeValue === 'dark' ? "bg-03" : "bg-[#fff]"} rounded-[8px] `}
+            onClick={() => {
+                if(!disabled) setShowModal(true)
+            }}
         >
             <Text18px bold>{courseTitle}</Text18px>
             <Text15px color={themeValue === 'dark' ? '05' : '07'} bold>{courseCode} ({className}-{semesterLevel})</Text15px>

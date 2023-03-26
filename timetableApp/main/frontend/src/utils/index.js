@@ -1,7 +1,6 @@
 import { patchSubject } from "./apiCalls";
 
 export const searchSubjectByQuery = (value, subjects, setViewableData) => {
-    console.log(value, subjects, setViewableData)
     if (value.length) {
         const filtered = subjects.filter((item) => {
             const { courseCode, courseTitle, class: className, semesterLevel } = item;
@@ -65,6 +64,8 @@ export function saveChangesToSubjects(details, viewableData, setViewableData, cl
 }
 
 
+
+
 export function generateInputForTimetable(obj) {
     const result = [];
     if (obj.bca1) result.push(['bca', 'I'])
@@ -90,4 +91,23 @@ export function generateInputForTimetable(obj) {
     if (obj.mba5) result.push(['mba', 'V'])
     if (obj.mba6) result.push(['mba', 'VI'])
     return result;
+}
+
+
+export function checkIfSubjectIsAPreference(id, preferencesMap, courseCode, taughtBy) {
+    const iterator1 = preferencesMap[Symbol.iterator]();
+    const preferencesList = [];
+    for (const item of iterator1) {
+        preferencesList.push(item[1]);
+    }
+    for (let i = 0; i < preferencesList.length; i++) {
+        if (preferencesList[i].subjectId === id) {
+            const key = `${preferencesList[i].day}${preferencesList[i].period}`;
+            const val = preferencesMap.get(key);
+            val.text = `${courseCode} ${taughtBy ? taughtBy : 'N.A.'}`
+            preferencesMap.set(key, val);
+            return preferencesMap;
+        }
+    }
+    return null;
 }

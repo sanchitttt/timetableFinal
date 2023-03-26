@@ -1,7 +1,6 @@
 const jsonToExcel = require("../utils/jsonToExcel")
 const TimetableExcelClass = require('../service/timetableExcel.service');
 const TimetableExcelClassInstance = new TimetableExcelClass();
-const mime = require('mime');
 
 const getGenerateTimetableInExcelFormat = async (req, res) => {
     try {
@@ -12,18 +11,11 @@ const getGenerateTimetableInExcelFormat = async (req, res) => {
         res.setHeader("Content-Disposition", "attachment; filename=" + "users.xslx");
         workBook.xlsx.writeFile("./users.xlsx").then(() => {
             console.log('file is written');
-            res.sendFile('C://Users/Sanchit/Desktop/Timetable/backend/users.xlsx', (err) => {
+            res.sendFile('C://Users/Sanchit/Desktop/TimetableApp/timetableApp/main/backend/users.xlsx', (err) => {
                 console.log(err);
                 console.log('error downloading');
             })
         })
-        // res.download('./users.xlsx');
-        // clearTimeout(id);
-        // res.end();
-        // const fileName = 'users.xlsl';
-        // const mimeType = mime.getType('../users.xlsl');
-        // res.setHeader("Content-Disposition", "attachment;file=" + fileName);
-        // res.setHeader("Content-Type", mimeType)
     } catch (error) {
         console.log(error)
         res.status(500).end();

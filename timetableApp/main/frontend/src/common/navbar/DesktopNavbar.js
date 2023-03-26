@@ -8,6 +8,7 @@ import ThemeIcon from '../ThemeIcon';
 import { useNavigate } from 'react-router-dom';
 import TimetableIcon from '../TimetableIcon';
 import RoomsIcon from '../RoomsIcon';
+import RoomPreferencesIcon from '../RoomPreferencesIcon';
 
 function DesktopNavbar() {
   const Theme = useContext(ThemeContext);
@@ -20,17 +21,30 @@ function DesktopNavbar() {
         <Logo />
       </div>
       <div className='flex flex-col gap-[25px] justify-between items-center mb-[25px]'>
-        <div onClick={() => navigate('/timetable')}>
+        <div onClick={() => navigate('/timetable')}
+          title='Timetable'
+        >
           <TimetableIcon />
         </div>
-        <div onClick={() => navigate('/rooms')}>
+        <div onClick={() => navigate('/rooms')}
+          title='Rooms'
+        >
           <RoomsIcon />
         </div>
-        <div onClick={() => navigate('/subjects')}>
+        <div onClick={() => navigate('/subjects')}
+          title='Subjects'
+        >
           <BooksIcon />
         </div>
-        <div onClick={() => navigate('/teachers')}>
+        <div onClick={() => navigate('/teachers')}
+          title='Teachers'
+        >
           <TeacherIcon />
+        </div>
+        <div onClick={() => navigate('/timetablePreferences')}
+          title='Timetable Preferences'
+        >
+          <RoomPreferencesIcon />
         </div>
         <ThemeIcon />
         <div className='w-[103px] h-[1px] bg-[#494E6E]'></div>

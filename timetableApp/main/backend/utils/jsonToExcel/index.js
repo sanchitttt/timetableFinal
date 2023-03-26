@@ -5,19 +5,19 @@ function jsonToExcel(data, rowSpanLength) {
     const workSheet = workBook.addWorksheet("Timetable");
     const rowSpan = rowSpanLength;
 
-    console.log(rowSpanLength);
+    
 
     workSheet.columns = [
-        { header: "Day", key: "Day", width: "100" },
-        { header: "Branch", key: "Branch", width: "100" },
-        { header: "1st Period", key: "Period1", width: "100" },
-        { header: "2nd Period", key: "Period2", width: "100" },
-        { header: "3rd Period", key: "Period3", width: "100" },
-        { header: "4th Period", key: "Period4", width: "100" },
-        { header: "5th Period", key: "Period5", width: "100" },
-        { header: "6th Period", key: "Period6", width: "100" },
-        { header: "7th Period", key: "Period7", width: "100" },
-        { header: "8th Period", key: "Period8", width: "100" },
+        { header: "Day", key: "Day", width: "35" },
+        { header: "Branch", key: "Branch", width: "35" },
+        { header: "1st Period", key: "Period1", width: "35" },
+        { header: "2nd Period", key: "Period2", width: "35" },
+        { header: "3rd Period", key: "Period3", width: "35" },
+        { header: "4th Period", key: "Period4", width: "35" },
+        { header: "5th Period", key: "Period5", width: "35" },
+        { header: "6th Period", key: "Period6", width: "35" },
+        { header: "7th Period", key: "Period7", width: "35" },
+        { header: "8th Period", key: "Period8", width: "35" },
     ];
 
     data = JSON.parse(JSON.stringify(data));

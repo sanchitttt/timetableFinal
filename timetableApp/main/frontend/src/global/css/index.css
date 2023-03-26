@@ -16,8 +16,13 @@ body {
     background-color: antiquewhite;
 }
 
-.row:nth-child(even){
+.row:nth-child(even) {
     background-color: aqua;
+}
+
+.tab:hover {
+    background-color: rgba(146, 119, 255, 0.25);
+    transition: 0.15s;
 }
 
 @media screen and (max-width:968px) {

@@ -11,7 +11,7 @@ import Text15px from '../text/Text15px';
  * @returns 
  */
 
-function TextField({ value, onChange, label, placeholder, required }) {
+function TextField({ value, onChange, label, placeholder, required, disabled }) {
     const Theme = useContext(ThemeContext);
     const { themeValue } = Theme;
 
@@ -19,6 +19,8 @@ function TextField({ value, onChange, label, placeholder, required }) {
         <div className='flex flex-col'>
             {label && <Text15px color={`${themeValue === 'dark' ? "05" : "07"}`}>{label}</Text15px>}
             <input
+                aria-describedby={disabled}
+                disabled={disabled}
                 style={{ border: '1px solid #252945', padding: '25px' }}
                 width='100%'
                 type='text'

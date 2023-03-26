@@ -1,8 +1,9 @@
 import React from 'react'
 
-function Button5({ children, longWidth, height }) {
+function Button5({ children, longWidth, height, onClick }) {
   return (
     <div
+      onClick={onClick}
       role='button'
       aria-describedby='button'
       className={`flex items-center  justify-center ${longWidth ? 'w-[149px]' : 'w-[89px]'} h-[48px] bg-09 hover:bg-10 rounded-full duration-75 `}

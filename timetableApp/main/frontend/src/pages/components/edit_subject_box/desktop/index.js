@@ -8,7 +8,8 @@ import TextField from '../../../../common/inputs/TextField';
 import Text15px from '../../../../common/text/Text15px';
 import TeachersContext from '../../../../global/contexts/TeachersContext';
 import ThemeContext from '../../../../global/contexts/ThemeContext';
-import { saveChangesToSubjects } from '../../../../utils';
+import TimetablePreferenceContext from '../../../../global/contexts/TimetablePreferenceContext';
+import { checkIfSubjectIsAPreference, saveChangesToSubjects } from '../../../../utils';
 import PageHeading from '../../PageHeading';
 import EditSubjectHeading from '../EditSubjectHeading';
 
@@ -25,6 +26,8 @@ function EditSubjectBoxDesktop({ _id, subjectTitle, subjectCode, scheduledClasse
 
   const Theme = useContext(ThemeContext);
   const Teachers = useContext(TeachersContext);
+  const Preferences = useContext(TimetablePreferenceContext);
+  const { timetablePreferencesValue, setTimetablePreferences } = Preferences;
   const { teachersValue } = Teachers;
   const { themeValue } = Theme;
 
@@ -43,6 +46,12 @@ function EditSubjectBoxDesktop({ _id, subjectTitle, subjectCode, scheduledClasse
       courseType: courseTypeState
     }, viewableData, setViewableData, closeModal, event
     )
+    const result = checkIfSubjectIsAPreference(_id, timetablePreferencesValue, subjectCodeState, taughtByState);
+    console.log(result);
+    if (result) {
+      const newMap = new Map(result);
+      setTimetablePreferences(newMap);
+    }
   }
 
   return (

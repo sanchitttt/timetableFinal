@@ -1,8 +1,8 @@
 import React from 'react'
 
-function DeleteIcon() {
+function DeleteIcon({large}) {
     return (
-        <svg width="10" height="13"
+        <svg width={large?"30":"10"} height={large?"30":"13"}
             role='button'
             ariaDescribedBy='button'
             xmlns="http://www.w3.org/2000/svg">

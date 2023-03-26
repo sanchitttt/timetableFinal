@@ -10,16 +10,18 @@ function ThemeIcon() {
     return (
         <>
             <div className={`${themeValue === 'light' && 'hidden'}`}
-                onClick={() =>{
+                onClick={() => {
                     changeTheme('light')
                 }}
+                title='Toggle theme'
             >
                 <LightThemeIcon />
             </div>
             <div className={`${themeValue == 'dark' && 'hidden'}`}
-                onClick={() =>{
+                onClick={() => {
                     changeTheme('dark')
                 }}
+                title='Toggle theme'
             >
                 <DarkThemeIcon />
             </div>
