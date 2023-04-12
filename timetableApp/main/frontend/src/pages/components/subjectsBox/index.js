@@ -6,6 +6,7 @@ import ThemeContext from '../../../global/contexts/ThemeContext';
 import ActiveStatus from '../active_status';
 import { Modal } from '@mui/material'
 import EditSubjectBox from '../edit_subject_box';
+import { motion } from 'framer-motion'
 
 
 
@@ -15,12 +16,20 @@ function SubjectsBox({ _id, courseCode, courseTitle, classSchedulePerWeek, class
     const { themeValue } = Theme;
 
     return (
-        <div
+        <motion.div
             role={!disabled && 'button'}
             className={`p-[20px]  w-[300px] h-[200px] justify-between gap-[10px] flex flex-col ${color ? 'bg-14' : themeValue === 'dark' ? "bg-03" : "bg-[#fff]"} rounded-[8px] `}
             onClick={() => {
-                if(!disabled) setShowModal(true)
+                if (!disabled) setShowModal(true)
             }}
+            initial={{ opacity:0,y:-75}}
+            animate={{ opacity:1,y:0}}
+            transition={{ delay: '0.3' }}
+        // transition={{
+        //     type: "spring",
+        //     stiffness: 260,
+        //     damping: 20
+        // }}
         >
             <Text18px bold>{courseTitle}</Text18px>
             <Text15px color={themeValue === 'dark' ? '05' : '07'} bold>{courseCode} ({className}-{semesterLevel})</Text15px>
@@ -49,7 +58,7 @@ function SubjectsBox({ _id, courseCode, courseTitle, classSchedulePerWeek, class
                     />
                 </div>
             </Modal>}
-        </div>
+        </motion.div>
     )
 }
 

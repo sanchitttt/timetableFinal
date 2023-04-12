@@ -7,13 +7,16 @@ import RoomsContext from '../../../global/contexts/RoomsContext';
 import SubjectsContext from '../../../global/contexts/SubjectsContext';
 import { generateInputForTimetable } from '../../../utils';
 import { Link } from 'react-router-dom';
-
-import Table from '../Table';
 import Button2 from '../../../common/buttons/Button2';
 import config from '../../../setup/config';
 import DesktopNavbar from '../../../common/navbar/DesktopNavbar';
 import TimetablePreferenceContext from '../../../global/contexts/TimetablePreferenceContext';
 import { TimetableApi } from '../../../utils/api_calls';
+import Timetable from '../Timetable';
+import ThemeContext from '../../../global/contexts/ThemeContext';
+import { motion } from 'framer-motion';
+import TimetableIcon from '../../../common/TimetableIcon';
+import CreateTimetableIcon from '../../../common/CreateTimetableIcon';
 
 const TimetableApiInstance = new TimetableApi();
 
@@ -90,6 +93,8 @@ function TimetableDesktop() {
     const Rooms = useContext(RoomsContext);
     const Subjects = useContext(SubjectsContext);
     const Preferences = useContext(TimetablePreferenceContext)
+    const Theme = useContext(ThemeContext);
+    const { themeValue } = Theme;
 
     const { roomsValue } = Rooms;
     const { subjectValue, mergedSubjectsValue } = Subjects;
@@ -114,6 +119,7 @@ function TimetableDesktop() {
             }
             else {
                 let res = generateTimetable(inputArrState, roomsValue, [...subjectValue, ...mergedSubjectsValue], preferencesState, true);
+
                 setData(res)
                 setHasErrors(false)
                 setHasGenerated(true);
@@ -144,10 +150,15 @@ function TimetableDesktop() {
 
     useEffect(() => {
         try {
-            let res = generateTimetable(inputArrState, roomsValue, [...subjectValue, ...mergedSubjectsValue], preferencesState, true);
-            setData(res)
-            setHasErrors(false)
+            let res;
+            if (mergedSubjectsValue && subjectValue) {
+                res = generateTimetable(inputArrState, roomsValue, [...subjectValue, ...mergedSubjectsValue], preferencesState, true);
+                setData(res)
+                setHasErrors(false)
+            }
+
         } catch (error) {
+            console.log(error)
             setHasErrors(error);
         }
     }, [subjectValue])
@@ -187,14 +198,22 @@ function TimetableDesktop() {
             <div className='h-[100%]'>
                 <DesktopNavbar />
             </div>
-            <div className='flex items-center w-[85%] flex-col justify-center h-[100vh] '>
+            <div className='flex items-center w-[100%] mx-[5%] flex-col justify-center h-[100vh] '>
                 <div className='w-[100%] flex flex-col justify-between'>
                     <div className='flex justify-between items-center w-[100%]'>
-                        <div className='flex flex-col'>
+                        <motion.div className='flex flex-col'
+                            initial={{ opacity: 0, x: -75 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: '0.3' }}
+                        >
                             <Text24px>Timetable</Text24px>
                             <Text15px>Generate timetable for : </Text15px>
-                        </div>
-                        <div className='flex gap-[30px]'>
+                        </motion.div>
+                        <motion.div className='flex gap-[30px]'
+                            initial={{ opacity: 0, x: 75 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: '0.3' }}
+                        >
                             <Link to={hasLoaded && `${config.BACKEND_URL}/timetable-excel?rowspan=${inputArrState.length}`}>
                                 <Button2
                                     onClick={downloadHandler}
@@ -203,12 +222,16 @@ function TimetableDesktop() {
                             </Link>
                             <Button2 disabled={!hasGenerated} onClick={clickHandler}>Load Data</Button2>
                             <Button2 onClick={showTimetableHandler}>Show Preview</Button2>
-                        </div>
+                        </motion.div>
 
                     </div>
-                    <div className='flex gap-[100px]'>
+                    <motion.div className='flex gap-[100px]'
+                        initial={{ opacity: 0, x: -75 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: '0.3' }}
+                    >
                         <div className='flex flex-col'>
-                            <h1>BCA</h1>
+                            <h1 className={`${themeValue === 'dark' ? 'text-[#fff]' : 'text-[#000]'}`}>BCA</h1>
                             <Checkbox label='I' value={markedSubjects.bca1} onChange={(e) => dispatch({ type: 'bca1', value: e.target.checked })} />
                             <Checkbox label='II' value={markedSubjects.bca2} onChange={(e) => dispatch({ type: 'bca2', value: e.target.checked })} />
                             <Checkbox label='III' value={markedSubjects.bca3} onChange={(e) => dispatch({ type: 'bca3', value: e.target.checked })} />
@@ -218,14 +241,14 @@ function TimetableDesktop() {
                         </div>
 
                         <div className='flex flex-col'>
-                            <h1>MCA</h1>
+                            <h1 className={`${themeValue === 'dark' ? 'text-[#fff]' : 'text-[#000]'}`}>MCA</h1>
                             <Checkbox label='I' value={markedSubjects.mca1} onChange={(e) => dispatch({ type: 'mca1', value: e.target.checked })} />
                             <Checkbox label='II' value={markedSubjects.mca2} onChange={(e) => dispatch({ type: 'mca2', value: e.target.checked })} />
                             <Checkbox label='III' value={markedSubjects.mca3} onChange={(e) => dispatch({ type: 'mca3', value: e.target.checked })} />
                             <Checkbox label='IV' value={markedSubjects.mca4} onChange={(e) => dispatch({ type: 'mca4', value: e.target.checked })} />
                         </div>
                         <div className='flex flex-col'>
-                            <h1>BBA</h1>
+                            <h1 className={`${themeValue === 'dark' ? 'text-[#fff]' : 'text-[#000]'}`}>BBA</h1>
                             <Checkbox label='I' value={markedSubjects.bba1} onChange={(e) => dispatch({ type: 'bba1', value: e.target.checked })} />
                             <Checkbox label='II' value={markedSubjects.bba2} onChange={(e) => dispatch({ type: 'bba2', value: e.target.checked })} />
                             <Checkbox label='III' value={markedSubjects.bba3} onChange={(e) => dispatch({ type: 'bba3', value: e.target.checked })} />
@@ -234,23 +257,32 @@ function TimetableDesktop() {
                             <Checkbox label='VI' value={markedSubjects.bba6} onChange={(e) => dispatch({ type: 'bba6', value: e.target.checked })} />
                         </div>
                         <div className='flex flex-col'>
-                            <h1>MBA</h1>
+                            <h1 className={`${themeValue === 'dark' ? 'text-[#fff]' : 'text-[#000]'}`}>MBA</h1>
                             <Checkbox label='I' value={markedSubjects.mba1} onChange={(e) => dispatch({ type: 'mba1', value: e.target.checked })} />
                             <Checkbox label='II' value={markedSubjects.mba2} onChange={(e) => dispatch({ type: 'mba2', value: e.target.checked })} />
                             <Checkbox label='III' value={markedSubjects.mba3} onChange={(e) => dispatch({ type: 'mba3', value: e.target.checked })} />
                             <Checkbox label='IV' value={markedSubjects.mba4} onChange={(e) => dispatch({ type: 'mba4', value: e.target.checked })} />
                         </div>
-                    </div>
+                    </motion.div>
 
-                    <div className='mt-[20px] w-[100%] h-[65vh] overflow-scroll '>
+                    <div className='mt-[20px] w-[100%] h-[65vh] flex items-center justify-center'>
+                        {!hasGenerated &&
+                            <motion.div
+                                initial={{ opacity: 0, y: 100 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: '0.3' }}
+                                className='flex flex-col gap-[30px] flex items-center justify-center'
+                            >
+                                <CreateTimetableIcon />
+                                <h1 className={`${themeValue === 'dark' ? 'text-[#fff]' : 'text-[#000]'}`}>Generate a timetable for it to preview here</h1>
+                            </motion.div>}
                         {hasErrors ?
                             <>
                                 <h1 className='text-[40px] text-09'>{hasErrors.type}</h1>
                                 <h3 className={'text-09'}>{hasErrors.message}</h3>
                             </>
                             :
-                            data && <Table data={data} />
-
+                            data && <Timetable data={data} rowSpanLength={inputArrState.length} />
                         }
                     </div>
 

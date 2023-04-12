@@ -14,7 +14,7 @@ import NoRecords from '../../components/no_records_found';
 import InvoicesHeading from '../../components/PageHeading';
 import SubjectsBox from '../../components/subjectsBox';
 import { SubjectsApi } from '../../../utils/api_calls';
-
+import { motion } from 'framer-motion';
 
 const SubjectsApiInstance = new SubjectsApi();
 
@@ -88,7 +88,11 @@ function SubjectsDesktop() {
               placeholder='Search by course name, code or semester'
             />
           </div>
-          <div className='flex w-[300px] mt-[10px] gap-[7.5px]'>
+          <motion.div className='flex w-[300px] mt-[10px] gap-[7.5px]'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: '0.25' }}
+          >
             {TABS.map((tab) => <div
               onClick={() => setActiveTab(tab)}
             >
@@ -100,7 +104,7 @@ function SubjectsDesktop() {
               </Tab>
             </div>
             )}
-          </div>
+          </motion.div>
           {loading ?
             <div className='w-[100%] h-[85vh] flex items-center justify-center' >
               <CircularProgress />

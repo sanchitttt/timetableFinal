@@ -5,7 +5,8 @@ import Text15px from '../../../common/text/Text15px'
 import Text18px from '../../../common/text/Text18px'
 import ThemeContext from '../../../global/contexts/ThemeContext'
 import TimetablePreferenceContext from '../../../global/contexts/TimetablePreferenceContext'
-import { PreferencesApi } from '../../../utils/api_calls'
+import { PreferencesApi } from '../../../utils/api_calls';
+import { motion } from 'framer-motion'
 
 const PreferenceApiInstance = new PreferencesApi();
 
@@ -50,10 +51,13 @@ function PreferenceBox({ id, text, day, period, color }) {
     }
 
     return (
-        <div
+        <motion.div
             className={`preference-box p-[20px]  w-[315px] h-[130px] justify-between gap-[10px] flex flex-col ${color ? 'bg-14' : themeValue === 'dark' ? "bg-03" : "bg-[#fff]"} rounded-[8px] relative`}
             onMouseOver={mouseOverHandler}
             onMouseLeave={mouseLeaveHandler}
+            initial={{ opacity:0,y:-75}}
+            animate={{ opacity:1,y:0}}
+            transition={{ delay: '0.3' }}
         >
             <Text18px bold>{text}</Text18px>
             <Text18px bold>{days[day]} {periodState}</Text18px>
@@ -62,7 +66,7 @@ function PreferenceBox({ id, text, day, period, color }) {
             >
                 <DeleteIcon />
             </div>
-        </div>
+        </motion.div>
     )
 }
 

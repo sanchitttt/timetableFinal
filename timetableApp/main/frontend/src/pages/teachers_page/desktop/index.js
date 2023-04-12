@@ -47,7 +47,7 @@ function TeachersDesktop() {
       </div>
 
       <div className='flex items-center justify-center flex flex-col mt-[25px]'>
-        <div className='desktop:w-[630px] biggerDesktops:w-[850px] justify-between'>
+        <div className='desktop:w-[630px] biggerDesktops:w-[940px] justify-between'>
           <PageHeading
             buttonText={'Add teacher'}
             amount={viewableData ? viewableData.length : 0}

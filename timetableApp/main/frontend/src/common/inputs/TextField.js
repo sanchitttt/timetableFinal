@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import ThemeContext from '../../global/contexts/ThemeContext';
 import Text15px from '../text/Text15px';
+import { motion } from 'framer-motion';
 
 /**
  * @function TextField 
@@ -16,7 +17,12 @@ function TextField({ value, onChange, label, placeholder, required, disabled }) 
     const { themeValue } = Theme;
 
     return (
-        <div className='flex flex-col'>
+        <motion.div
+            className='flex flex-col'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: '0.25' }}
+        >
             {label && <Text15px color={`${themeValue === 'dark' ? "05" : "07"}`}>{label}</Text15px>}
             <input
                 aria-describedby={disabled}
@@ -30,7 +36,7 @@ function TextField({ value, onChange, label, placeholder, required, disabled }) 
                 className={`${themeValue === 'dark' ? 'bg-[#fff] text-08' : "bg-03 text-[#FFFFFF]"} rounded-[3px] h-[48px]`}
                 required={required}
             />
-        </div>
+        </motion.div>
 
     )
 }
